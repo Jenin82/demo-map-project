@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../../../components/modal";
 import InputWithIcon from "./InputWithIcon";
@@ -17,6 +17,14 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
     { formatted: string; geometry: { lat: number; lng: number } }[]
   >([]);
   const [selectedInput, setSelectedInput] = useState<null | number>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Clear inputs when the modal is opened
+      setStartLocation("");
+      setEndLocation("");
+    }
+  }, [isOpen]);
 
   const fetchSuggestions = async (query: string, inputValue: number) => {
     if (query.length > 0) {
@@ -48,6 +56,15 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
     }
     setSuggestions([]);
     setSelectedInput(null);
+
+    // Check if both locations have been selected
+    if (locations[0] && locations[1] && startLocation && endLocation) {
+      // Clear inputs
+      setStartLocation("");
+      setEndLocation("");
+      // Close modal
+      onClose();
+    }
   };
 
   const handleSwap = () => {
@@ -75,7 +92,7 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
           iconSrc="/input2.svg"
           altText="Ending Point Icon"
           placeholder="Ending point"
-          borderColorFocus={"#00C299"}
+          borderColorFocus="#00C299"
           value={endLocation}
           onChange={(e) => {
             setEndLocation(e.target.value);

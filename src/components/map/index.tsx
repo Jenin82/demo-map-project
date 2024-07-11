@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -7,7 +8,6 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect } from "react";
 import { useMapStore } from "../../services/store";
 import { LatLngTuple } from "leaflet";
 import {
@@ -16,22 +16,36 @@ import {
   intermediatePositionIcon,
 } from "./components/markers";
 
-const Map = () => {
+interface Location {
+  name: string;
+  position: [number, number];
+}
+
+const DEFAULT_LOCATIONS: Location[] = [
+  { name: "Location 1", position: [10.153292084669795, 76.39352723326559] },
+  { name: "Location 2", position: [25.25690664824555, 55.3643392541232] },
+];
+
+const Map: React.FC = () => {
   const { locations, zoom, tileUrl } = useMapStore();
+
+  // Use default locations if the array is empty
+  const effectiveLocations: Location[] =
+    locations.length > 0 ? locations : DEFAULT_LOCATIONS;
 
   return (
     <MapContainer
-      center={locations[0].position}
+      center={effectiveLocations[0].position}
       zoom={zoom}
       zoomControl={false}
       style={{ height: "100vh", width: "100%" }}
     >
       <TileLayer url={tileUrl} />
-      {locations.map((location, idx) => {
+      {effectiveLocations.map((location, idx) => {
         let icon;
         if (idx === 0) {
           icon = firstPositionIcon;
-        } else if (idx === locations.length - 1) {
+        } else if (idx === effectiveLocations.length - 1) {
           icon = lastPositionIcon;
         } else {
           icon = intermediatePositionIcon;
@@ -44,17 +58,20 @@ const Map = () => {
         );
       })}
       <Polyline
-        positions={locations.map((location) => location.position)}
+        positions={effectiveLocations.map((location) => location.position)}
         pathOptions={{ color: "#23396B", dashArray: "5, 10" }}
       />
-      <MapUpdater />
+      <MapUpdater locations={effectiveLocations} />
     </MapContainer>
   );
 };
 
-const MapUpdater = () => {
+interface MapUpdaterProps {
+  locations: Location[];
+}
+
+const MapUpdater: React.FC<MapUpdaterProps> = ({ locations }) => {
   const map = useMap();
-  const { locations } = useMapStore();
 
   useEffect(() => {
     if (locations.length > 0) {

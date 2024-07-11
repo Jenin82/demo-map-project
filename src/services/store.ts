@@ -20,7 +20,7 @@ export const useMapStore = create<MapType>((set) => ({
     { name: "Location 1", position: [10.153292084669795, 76.39352723326559] },
     { name: "Location 2", position: [25.25690664824555, 55.3643392541232] },
   ],
-  zoom: 1,
+  zoom: 3,
   tileUrl:
     "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
   setLocations: (locations) => set({ locations }),

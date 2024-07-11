@@ -5,12 +5,14 @@ interface RouteSettingsProps {
   toggleSettings: () => void;
   toggleSave: () => void;
   toggleLoad: () => void;
+  toggleDelete: () => void;
 }
 
 const RouteSettings: React.FC<RouteSettingsProps> = ({
   toggleSettings,
   toggleSave,
   toggleLoad,
+  toggleDelete,
 }) => {
   return (
     <>
@@ -26,7 +28,10 @@ const RouteSettings: React.FC<RouteSettingsProps> = ({
         </div>
       </div>
       <div className="flex justify-between items-center p-4 w-full mb-3">
-        <div className="rounded-[60px] bg-[#EB4E4E] text-black py-5 px-9 text-xl font-bold flex justify-between flex-nowrap items-center cursor-pointer">
+        <div
+          className="rounded-[60px] bg-[#EB4E4E] text-black py-5 px-9 text-xl font-bold flex justify-between flex-nowrap items-center cursor-pointer"
+          onClick={toggleDelete}
+        >
           Delete
         </div>
         <div
