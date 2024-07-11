@@ -10,6 +10,11 @@ import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import { useMapStore } from "../../services/store";
 import { LatLngTuple } from "leaflet";
+import {
+  firstPositionIcon,
+  lastPositionIcon,
+  intermediatePositionIcon,
+} from "./components/markers";
 
 const Map = () => {
   const { positions, zoom, tileUrl } = useMapStore();
@@ -22,14 +27,25 @@ const Map = () => {
       style={{ height: "100vh", width: "100%" }}
     >
       <TileLayer url={tileUrl} />
-      {positions.map((position, idx) => (
-        <Marker key={idx} position={position}>
-          <Popup>Marker {idx + 1}</Popup>
-        </Marker>
-      ))}
+      {positions.map((position, idx) => {
+        let icon;
+        if (idx === 0) {
+          icon = firstPositionIcon;
+        } else if (idx === positions.length - 1) {
+          icon = lastPositionIcon;
+        } else {
+          icon = intermediatePositionIcon;
+        }
+
+        return (
+          <Marker key={idx} position={position} icon={icon}>
+            <Popup>Marker {idx + 1}</Popup>
+          </Marker>
+        );
+      })}
       <Polyline
         positions={positions}
-        pathOptions={{ color: "blue", dashArray: "5, 10" }}
+        pathOptions={{ color: "#23396B", dashArray: "5, 10" }}
       />
       <MapUpdater />
     </MapContainer>

@@ -7,12 +7,14 @@ interface MapType {
   setPositions: (positions: [number, number][]) => void;
   setZoom: (zoom: number) => void;
   setTileUrl: (tileUrl: string) => void;
+  screen: number
+  isAddLocationModalOpen: boolean
 }
 
 export const useMapStore = create<MapType>((set) => ({
   positions: [
-    [51.505, -0.09],
-    [51.52, -0.12],
+    [10.153292084669795, 76.39352723326559],
+    [25.25690664824555, 55.3643392541232],
   ],
   zoom: 1,
   tileUrl:
@@ -20,6 +22,8 @@ export const useMapStore = create<MapType>((set) => ({
   setPositions: (positions) => set({ positions }),
   setZoom: (zoom) => set({ zoom }),
   setTileUrl: (tileUrl) => set({ tileUrl }),
+  screen: 0,
+  isAddLocationModalOpen: false
 }));
 
 
