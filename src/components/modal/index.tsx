@@ -15,7 +15,10 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalBody}>{children}</div>
+        <div className={styles.modalBody}>
+          <img src="/notch.svg" alt="notch" className="mb-3" />
+          {children}
+        </div>
       </div>
     </div>
   );

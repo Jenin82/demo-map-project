@@ -8,11 +8,8 @@
   display: flex;
   /* Use flexbox to center the modal content */
   justify-content: center;
-  align-items: center;
-  background-color: rgba(146,
-      146,
-      146,
-      0.11);
+  align-items: end;
+  background-color: rgba(146, 146, 146, 0.11);
   /* Dark background with some transparency */
   backdrop-filter: blur(5px);
   /* Blur the background behind the overlay */
@@ -22,146 +19,39 @@
 }
 
 .modalContent {
-  width: 80%;
-  background-color: #ffffffea;
-  border-radius: 15px;
+  width: 100%;
+  background-color: #131418f5;
+  /* border-radius: 15px; */
   overflow: hidden;
   position: relative;
   max-height: 100vh;
   overflow-y: auto;
   animation: appear 0.5s forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+  color: white;
 }
 
 .modalContent::-webkit-scrollbar {
   display: none;
 }
 
-.iconContainer {
-  padding-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.icon {
-  height: 70px;
-  width: 70px;
-  display: flex;
-  font-size: 24px;
-  color: #039855;
-  align-items: center;
-  justify-content: center;
-  background-color: #d1fadf;
-  border-radius: 50%;
-  border: 12px solid #e8fcef;
-}
-
-.iconError {
-  font-size: 24px;
-  color: red;
-  border-radius: 50%;
-  background-color: #fad2d1;
-  border: 12px solid #fce8e8;
-  height: 70px;
-  width: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modalTitle {
-  font-weight: bold;
-  font-size: 20px;
-  color: black;
-  text-align: center;
-  padding: 10px 1rem 0 1rem;
-}
-
-.modalText {
-  color: black;
-}
-
-.modalHeader {
-  padding: 10px;
-  /* Adjust padding as needed */
-  display: flex;
-  /* Use flexbox to place items */
-  justify-content: flex-end;
-  /* Align close button to the right */
-}
-
-.modalClose {
-  cursor: pointer;
-  /* Make the close icon look clickable */
-  font-size: 24px;
-  /* Adjust the size of the close icon */
-}
-
 .modalBody {
-  padding: 20px; 
+  padding: 20px;
+  padding-top: 0;
   width: 100%;
-}
-
-.btn_container {
+  height: 96vh;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 10px 30px 30px 30px;
-}
-
-.btn_cancel,
-.btn_submit {
-  width: 48%;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.btn_cancel {
-  background-color: rgb(234, 232, 232);
-  color: var(--primary);
-}
-
-.btn_submit {
-  background-color: var(--primary);
-  color: white;
-}
-
-.btn_submit:hover {
-  background-color: rgb(29, 79, 205);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-button:hover {
-  filter: brightness(0.95);
-}
-
-/* Optional: Mobile responsiveness. Adjust as necessary. */
-@media (max-width: 768px) {
-
-
-  .btn_cancel,
-  .btn_submit {
-    width: 100%;
-  }
 }
 
 @keyframes appear {
   0% {
-    transform: scale(0);
+    transform: translateY(100%);
     opacity: 0;
   }
 
   100% {
-    transform: scale(1);
+    transform: translateY(0);
     opacity: 1;
   }
 }

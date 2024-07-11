@@ -9,6 +9,8 @@ interface MapType {
   setTileUrl: (tileUrl: string) => void;
   screen: number
   isAddLocationModalOpen: boolean
+  suggestions: { formatted: string; geometry: { lat: number; lng: number } }[];
+  inputSelected: number
 }
 
 export const useMapStore = create<MapType>((set) => ({
@@ -23,7 +25,9 @@ export const useMapStore = create<MapType>((set) => ({
   setZoom: (zoom) => set({ zoom }),
   setTileUrl: (tileUrl) => set({ tileUrl }),
   screen: 0,
-  isAddLocationModalOpen: false
+  isAddLocationModalOpen: false,
+  suggestions: [],
+  inputSelected: 1
 }));
 
 

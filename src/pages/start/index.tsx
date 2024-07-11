@@ -3,6 +3,7 @@ import Map from "../../components/map";
 import { useMapStore } from "../../services/store";
 import AddLocation from "./components/addLocation";
 import Initial from "./components/initial";
+import Route from "./components/route";
 
 const Start = () => {
   const { screen, isAddLocationModalOpen } = useMapStore();
@@ -28,6 +29,7 @@ const Start = () => {
           <Map />
         </div>
         {screen === 0 && <Initial />}
+        {screen === 1 && <Route />}
         <AddLocation
           isOpen={isAddLocationModalOpen}
           onClose={() => {

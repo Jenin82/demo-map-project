@@ -12,6 +12,7 @@
   "dependencies": {
     "@eslint/config-array": "^0.17.0",
     "@eslint/object-schema": "^2.1.4",
+    "axios": "^1.7.2",
     "glob": "^11.0.0",
     "leaflet": "^1.9.4",
     "lru-cache": "^11.0.0",
