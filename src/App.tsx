@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NotFound from "./pages/notFound";
 import Layout from "./components/layout";
 import Home from "./pages/home";
+import Start from "./pages/start";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,13 +14,16 @@ function App() {
       path: "/404",
       element: <NotFound />,
     },
-
+    {
+      path: "/",
+      element: <Start />,
+    },
     {
       path: "/",
       element: <Layout />,
       children: [
         {
-          path: "/",
+          path: "/home",
           element: <Home />,
         },
       ],
