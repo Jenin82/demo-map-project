@@ -10,7 +10,7 @@ type Props = {
 };
 
 const AddLocation = ({ isOpen, onClose }: Props) => {
-  const { positions, setPositions } = useMapStore();
+  const { locations, setLocations } = useMapStore();
   const [startLocation, setStartLocation] = useState("");
   const [endLocation, setEndLocation] = useState("");
   const [suggestions, setSuggestions] = useState<
@@ -40,10 +40,10 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
   const handleSelect = (value: string, position: [number, number]) => {
     if (selectedInput === 1) {
       setStartLocation(value);
-      setPositions([position, positions[1]]);
+      setLocations([{ name: value, position }, locations[1]]);
     } else if (selectedInput === 2) {
       setEndLocation(value);
-      setPositions([positions[0], position]);
+      setLocations([locations[0], { name: value, position }]);
       useMapStore.setState({ screen: 1 });
     }
     setSuggestions([]);
@@ -53,7 +53,7 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
   const handleSwap = () => {
     setStartLocation(endLocation);
     setEndLocation(startLocation);
-    setPositions([positions[1], positions[0]]);
+    setLocations([locations[1], locations[0]]);
   };
 
   return (
@@ -75,7 +75,7 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
           iconSrc="/input2.svg"
           altText="Ending Point Icon"
           placeholder="Ending point"
-          borderColorFocus="#00C299"
+          borderColorFocus={"#00C299"}
           value={endLocation}
           onChange={(e) => {
             setEndLocation(e.target.value);

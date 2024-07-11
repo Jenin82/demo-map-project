@@ -26,10 +26,19 @@ const InputWithIcon = ({
       />
       <input
         type="text"
-        className={`w-full border-2 border-[#131418F5] focus:border-${borderColorFocus} focus:outline-none rounded-full bg-[#2B2C2FCC] pl-10 pr-6 py-3`}
+        className="w-full border-2 border-[#131418F5] focus:outline-none rounded-full bg-[#2B2C2FCC] pl-10 pr-6 py-3 placeholder-[#888]"
+        style={{
+          borderColor: value ? borderColorFocus : "#131418F5",
+        }}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onFocus={(e) => {
+          e.target.style.borderColor = borderColorFocus;
+        }}
+        onBlur={(e) => {
+          e.target.style.borderColor = value ? borderColorFocus : "#131418F5";
+        }}
       />
     </div>
   );

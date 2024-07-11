@@ -17,34 +17,34 @@ import {
 } from "./components/markers";
 
 const Map = () => {
-  const { positions, zoom, tileUrl } = useMapStore();
+  const { locations, zoom, tileUrl } = useMapStore();
 
   return (
     <MapContainer
-      center={positions[0]}
+      center={locations[0].position}
       zoom={zoom}
       zoomControl={false}
       style={{ height: "100vh", width: "100%" }}
     >
       <TileLayer url={tileUrl} />
-      {positions.map((position, idx) => {
+      {locations.map((location, idx) => {
         let icon;
         if (idx === 0) {
           icon = firstPositionIcon;
-        } else if (idx === positions.length - 1) {
+        } else if (idx === locations.length - 1) {
           icon = lastPositionIcon;
         } else {
           icon = intermediatePositionIcon;
         }
 
         return (
-          <Marker key={idx} position={position} icon={icon}>
-            <Popup>Marker {idx + 1}</Popup>
+          <Marker key={idx} position={location.position} icon={icon}>
+            <Popup>{location.name}</Popup>
           </Marker>
         );
       })}
       <Polyline
-        positions={positions}
+        positions={locations.map((location) => location.position)}
         pathOptions={{ color: "#23396B", dashArray: "5, 10" }}
       />
       <MapUpdater />
@@ -54,17 +54,16 @@ const Map = () => {
 
 const MapUpdater = () => {
   const map = useMap();
-  const { positions } = useMapStore();
+  const { locations } = useMapStore();
 
   useEffect(() => {
-    if (positions.length > 0) {
-      const bounds = positions.map((position) => [
-        position[0],
-        position[1],
-      ]) as LatLngTuple[];
+    if (locations.length > 0) {
+      const bounds = locations.map(
+        (location) => location.position
+      ) as LatLngTuple[];
       map.fitBounds(bounds);
     }
-  }, [positions, map]);
+  }, [locations, map]);
 
   return null;
 };
