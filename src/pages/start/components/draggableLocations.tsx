@@ -39,7 +39,7 @@ const DraggableLocations: React.FC = () => {
         index={index}
         location={location}
         moveLocation={moveLocation}
-        isStart={index === 0}
+        isStart={index === 0} 
         isEnd={index === localLocations.length - 1}
       />
     );
@@ -47,7 +47,7 @@ const DraggableLocations: React.FC = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex flex-col items-center bg-[#131418F5] p-4 w-full h-[70vh]">
+      <div className="flex flex-col items-center bg-[#131418F5] p-4 w-full h-[40vh]">
         <div className="w-full">
           {localLocations.map((location, index) =>
             renderLocation(location, index)
@@ -120,6 +120,9 @@ const DraggableLocation: React.FC<DraggableLocationProps> = ({
       ref={ref}
       className={`flex justify-between items-center gap-4`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
+      onClick={() => {
+        useMapStore.setState({ isAddLocationModalOpen: true });
+      }}
     >
       <div className="text-white bg-[#2B2C2F] py-4 px-6 my-2 rounded-full text-xl font-bold w-full flex gap-3">
         {isStart && <img src="/startMarker.svg" alt="Start" width={24} />}

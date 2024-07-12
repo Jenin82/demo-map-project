@@ -21,6 +21,7 @@ const MapTileSelector = () => {
 
   const handleApply = () => {
     setTileUrl(previewTileUrl);
+    useMapStore.setState({ screen: 1 });  
   };
 
   const handleCancel = () => {
@@ -87,7 +88,7 @@ const MapTileSelector = () => {
             alt="Tile 3"
             className={`${styles.focusableImage} ${
               previewTileUrl ===
-              "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png"
+              "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                 ? styles.focused
                 : ""
             }`}

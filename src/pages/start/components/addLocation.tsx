@@ -58,23 +58,32 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
     setSelectedInput(null);
 
     // Check if both locations have been selected
-    if (locations[0] && locations[1] && startLocation && endLocation) {
-      // Clear inputs
-      setStartLocation("");
-      setEndLocation("");
-      // Close modal
-      onClose();
-    }
+    // if (locations[0] && locations[1] && startLocation && endLocation) {
+    //   // Clear inputs
+    //   setStartLocation("");
+    //   setEndLocation("");
+    //   // Close modal
+    //   onClose();
+    // }
   };
 
   const handleSwap = () => {
-    setStartLocation(endLocation);
-    setEndLocation(startLocation);
-    setLocations([locations[1], locations[0]]);
+    if (startLocation && endLocation) {
+      setStartLocation(endLocation);
+      setEndLocation(startLocation);
+      setLocations([locations[1], locations[0]]);
+    }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        onClose();
+        setStartLocation("");
+        setEndLocation("");
+      }}
+    >
       <div className="text-2xl font-bold mb-4">Add Locations</div>
       <div className="w-full relative">
         <InputWithIcon
@@ -100,7 +109,11 @@ const AddLocation = ({ isOpen, onClose }: Props) => {
           }}
         />
         <img
-          className="absolute right-[-1.5rem] top-1/2 transform bg-[#1F2024] border-2 border-[#131418] rounded-full -translate-y-1/2 w-12 h-12 z-20 -translate-x-14 p-3 cursor-pointer"
+          className={`absolute right-[-1.5rem] top-1/2 transform bg-[#1F2024] border-2 border-[#131418] rounded-full -translate-y-1/2 w-12 h-12 z-20 -translate-x-14 p-3 cursor-pointer ${
+            !startLocation || !endLocation
+              ? "cursor-not-allowed opacity-50"
+              : "cursor-pointer"
+          }`}
           src="/swap.svg"
           alt="Swap Icon"
           onClick={handleSwap}
