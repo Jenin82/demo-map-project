@@ -117,6 +117,7 @@ const Route: React.FC = () => {
       ) : (
         <>
           <RouteHeader locations={locations} toggleSettings={toggleSettings} />
+          
           <RouteActions />
         </>
       )}
