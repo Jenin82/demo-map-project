@@ -52,15 +52,22 @@ const Map: React.FC = () => {
         }
 
         return (
-          <Marker key={idx} position={location.position} icon={icon}>
-            <Popup>{location.name}</Popup>
-          </Marker>
+          location &&
+          location?.position && (
+            <Marker key={idx} position={location.position} icon={icon}>
+              <Popup>{location.name}</Popup>
+            </Marker>
+          )
         );
       })}
-      <Polyline
-        positions={effectiveLocations.map((location) => location.position)}
-        pathOptions={{ color: "#23396B", dashArray: "5, 10" }}
-      />
+      {effectiveLocations &&
+        effectiveLocations.length > 1 &&
+        effectiveLocations[0]?.position && effectiveLocations[1]?.position && (
+          <Polyline
+            positions={effectiveLocations.map((location) => location.position)}
+            pathOptions={{ color: "#23396B", dashArray: "5, 10" }}
+          />
+        )}
       <MapUpdater locations={effectiveLocations} />
     </MapContainer>
   );
@@ -74,7 +81,7 @@ const MapUpdater: React.FC<MapUpdaterProps> = ({ locations }) => {
   const map = useMap();
 
   useEffect(() => {
-    if (locations.length > 0) {
+    if (locations.length > 0 && locations[0]?.position && locations[1]?.position) {
       const bounds = locations.map(
         (location) => location.position
       ) as LatLngTuple[];
