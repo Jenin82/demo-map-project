@@ -1,6 +1,8 @@
 import React from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaPlus } from "react-icons/fa6";
+import { useMapStore } from "../../../services/store";
+import AddIntermediateLocation from "./addIntermediateLocation";
 
 interface RouteHeaderProps {
   locations: { name: string; position: [number, number] }[];
@@ -11,6 +13,7 @@ const RouteHeader: React.FC<RouteHeaderProps> = ({
   locations,
   toggleSettings,
 }) => {
+  const { isIntrmediateLocationModalOpen } = useMapStore();
   const getFirstPart = (name: string) => {
     return name.split(/[, ]/)[0]; // Split by comma or space and take the first part
   };
@@ -32,9 +35,22 @@ const RouteHeader: React.FC<RouteHeaderProps> = ({
           {locations.length} Points
         </div>
       </div>
-      <div className="rounded-full bg-[#2B2C2FB2] p-3 h-12 w-12 text-xl flex justify-center items-center">
+      <div
+        className="rounded-full bg-[#2B2C2FB2] p-3 h-12 w-12 text-xl flex justify-center items-center"
+        onClick={() => {
+          useMapStore.setState({
+            isIntrmediateLocationModalOpen: !isIntrmediateLocationModalOpen,
+          });
+        }}
+      >
         <FaPlus />
       </div>
+      <AddIntermediateLocation
+        isOpen={isIntrmediateLocationModalOpen}
+        onClose={() => {
+          useMapStore.setState({ isIntrmediateLocationModalOpen: false });
+        }}
+      />
     </div>
   );
 };

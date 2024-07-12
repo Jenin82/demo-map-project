@@ -6,10 +6,10 @@ import Initial from "./components/initial";
 import Route from "./components/route";
 
 const Start = () => {
-  const { screen, isAddLocationModalOpen } = useMapStore();
+  const { screen, isAddLocationModalOpen, isIntrmediateLocationModalOpen } = useMapStore();
   return (
     <div className={styles.Wrapper}>
-      {!isAddLocationModalOpen && <div
+      {!isAddLocationModalOpen && !isIntrmediateLocationModalOpen && <div
         className={`${styles.top} bg-gradient-to-b from-[#0e1a28e8] to-transparent`}
       >
         <button>

@@ -13,6 +13,7 @@ interface MapType {
   isAddLocationModalOpen: boolean;
   suggestions: { formatted: string; geometry: { lat: number; lng: number } }[];
   inputSelected: number;
+  isIntrmediateLocationModalOpen: boolean;
 }
 
 export const useMapStore = create<MapType>((set) => ({
@@ -30,5 +31,6 @@ export const useMapStore = create<MapType>((set) => ({
   isAddLocationModalOpen: false,
   suggestions: [],
   inputSelected: 1,
+  isIntrmediateLocationModalOpen: false,
 }));
   
