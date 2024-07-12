@@ -7,11 +7,11 @@ import MapTileSelector from "./components/mapTileSelector";
 import Route from "./components/route";
 
 const Start = () => {
-  const { screen, isAddLocationModalOpen, isIntrmediateLocationModalOpen } =
+  const { screen, isAddLocationModalOpen, isIntrmediateLocationModalOpen, isDraggable } =
     useMapStore();
   return (
     <div className={styles.Wrapper}>
-      {!isAddLocationModalOpen && !isIntrmediateLocationModalOpen && (
+      {!isAddLocationModalOpen && !isIntrmediateLocationModalOpen && !isDraggable && (
         <div
           className={`${styles.top} bg-gradient-to-b from-[#0e1a28e8] to-transparent`}
         >

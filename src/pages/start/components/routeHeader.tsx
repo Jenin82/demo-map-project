@@ -13,7 +13,7 @@ const RouteHeader: React.FC<RouteHeaderProps> = ({
   locations,
   toggleSettings,
 }) => {
-  const { isIntrmediateLocationModalOpen } = useMapStore();
+  const { isIntrmediateLocationModalOpen, isDraggable } = useMapStore();
   const getFirstPart = (name: string) => {
     return name.split(/[, ]/)[0]; // Split by comma or space and take the first part
   };
@@ -26,7 +26,7 @@ const RouteHeader: React.FC<RouteHeaderProps> = ({
       >
         <HiDotsVertical />
       </div>
-      <div>
+      <div onClick={() => useMapStore.setState({ isDraggable: !isDraggable })}>
         <div className="text-2xl font-family-['Helvetica Neue'] text-center font-bold">
           {getFirstPart(locations[0].name)} -{" "}
           {getFirstPart(locations[locations.length - 1].name)}

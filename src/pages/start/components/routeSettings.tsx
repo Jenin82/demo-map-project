@@ -1,5 +1,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
+import { useMapStore } from "../../../services/store";
+import DraggableLocations from "./draggableLocations";
 
 interface RouteSettingsProps {
   toggleSettings: () => void;
@@ -14,6 +16,7 @@ const RouteSettings: React.FC<RouteSettingsProps> = ({
   toggleLoad,
   toggleDelete,
 }) => {
+  const { isDraggable } = useMapStore();
   return (
     <>
       <div className="flex justify-start gap-2 items-center p-4">
@@ -27,6 +30,7 @@ const RouteSettings: React.FC<RouteSettingsProps> = ({
           Route settings
         </div>
       </div>
+      {isDraggable && <DraggableLocations />}
       <div className="flex justify-between items-center p-4 w-full mb-3">
         <div
           className="rounded-[60px] bg-[#EB4E4E] text-black py-5 px-9 text-xl font-bold flex justify-between flex-nowrap items-center cursor-pointer"

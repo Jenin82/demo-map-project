@@ -6,6 +6,7 @@ import RouteActions from "./routeActions";
 import RouteHeader from "./routeHeader";
 import RouteSettings from "./routeSettings";
 import SaveRouteForm from "./saveRouteForm";
+import DraggableLocations from "./draggableLocations";
 
 const Route: React.FC = () => {
   const { locations, setLocations } = useMapStore();
@@ -15,6 +16,7 @@ const Route: React.FC = () => {
   const [deleteRouteForm, setDeleteRouteForm] = useState(false);
   const [routeName, setRouteName] = useState("");
   const [loading, setLoading] = useState(false);
+  const { isDraggable } = useMapStore();
 
   const toggleSettings = () => {
     if (locations.length > 0) {
@@ -117,7 +119,7 @@ const Route: React.FC = () => {
       ) : (
         <>
           <RouteHeader locations={locations} toggleSettings={toggleSettings} />
-          
+          {isDraggable && <DraggableLocations />}
           <RouteActions />
         </>
       )}
